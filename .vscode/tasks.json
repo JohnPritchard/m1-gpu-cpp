@@ -82,7 +82,7 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /opt/local/bin/clang++-mp-19",
-			"dependsOn": ["Build .metallib 02"],
+			"dependsOn": ["Build .metallib 02a"],
 		}, {
 			"type": "cppbuild",
 			"label": "Build 02",
@@ -114,7 +114,7 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /opt/local/bin/clang++-mp-19",
-			"dependsOn": ["Build .metallib 02"],
+			"dependsOn": ["Build .metallib 02a"],
 		}, {
 			"type": "cppbuild",
 			"label": "Build benchmark paper 02",
@@ -154,19 +154,29 @@
 			"args": [
 				"-sdk", "macosx", "metal",
 				"-c", "${workspaceFolder}/02-GeneralArrayOperations/ops.metal",
-				"-o", "${workspaceFolder}/02-GeneralArrayOperations/ops.air"
+				"-o", "${workspaceFolder}/02-GeneralArrayOperations/library.air"
 			]
 		}, {
 			"type": "shell",
 			"label": "Build .metallib 02",
 			"command": "xcrun",
 			"args": [
-				"-sdk", "macosx", "metallib", "${workspaceFolder}/02-GeneralArrayOperations/ops.air",
+				"-sdk", "macosx", "metallib", "${workspaceFolder}/02-GeneralArrayOperations/library.air",
 				"-o", "${workspaceFolder}/02-GeneralArrayOperations/ops.metallib"
 			],
 			"dependsOn": ["Build .air 02"]
 
-		}, {
+			}, {
+				"type": "shell",
+				"label": "Build .metallib 02a",
+				"command": "xcrun",
+				"args": [
+					"-sdk", "macosx", "metallib", "${workspaceFolder}/02-GeneralArrayOperations/library.air",
+					"-o", "${workspaceFolder}/02-GeneralArrayOperations/default.metallib"
+				],
+				"dependsOn": ["Build .metallib 02"]
+	
+			}, {
 			"type": "cppbuild",
 			"label": "Build 03",
 			"command": "/opt/local/bin/clang++-mp-19",
@@ -197,7 +207,7 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /opt/local/bin/clang++-mp-19",
-			"dependsOn": ["Build .metallib 03"],
+			"dependsOn": ["Build .metallib 03a"],
 		}, {
 			"type": "cppbuild",
 			"label": "Build benchmark paper 03",
@@ -230,7 +240,7 @@
 				"isDefault": true
 			},
 			"detail": "compiler: /opt/local/bin/clang++-mp-19",
-			"dependsOn": ["Build .metallib 03"],
+			"dependsOn": ["Build .metallib 03a"],
 		}, {
 			"type": "shell",
 			"label": "Build .air 03",
@@ -250,6 +260,16 @@
 			],
 			"dependsOn": ["Build .air 03"]
 
-		},
+			}, {
+				"type": "shell",
+				"label": "Build .metallib 03a",
+				"command": "xcrun",
+				"args": [
+					"-sdk", "macosx", "metallib", "${workspaceFolder}/03-2DKernels/ops.air",
+					"-o", "${workspaceFolder}/03-2DKernels/default.metallib"
+				],
+				"dependsOn": ["Build .metallib 03"]
+	
+			},
 	]
 }
