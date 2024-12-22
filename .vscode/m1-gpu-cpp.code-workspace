@@ -2,6 +2,12 @@
 	"folders": [
 		{
 			"path": ".."
+		},
+		{
+			"path": "../../epl_cpp_mac_gpu_lib"
+		},
+		{
+			"path": "../../epl_cpp_mac_gpu_lib.build"
 		}
 	],
 	"settings": {
